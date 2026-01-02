@@ -1,5 +1,14 @@
 pipeline {
     agent any 
+    parameters {
+        string(name: 'ECR_REPO', defaultValue: 'backend-app')
+        string(name: 'ECR_REPO2', defaultValue: 'frontend-app')
+    }
+
+    environment {
+        ECR_REPO  = "${params.ECR_REPO}"
+        ECR_REPO2 = "${params.ECR_REPO2}"
+    }
     tools {
         jdk 'jdk'
         nodejs 'nodejs'
@@ -19,7 +28,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git credentialsId: 'GITHUB', url: 'https://github.com/AmanPathak-DevOps/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project.git'
+                git credentialsId: 'GITHUB', url: 'https://github.com/dibychatt/End-to-End-Kubernetes-Three-Tier-DevSecOps-Project.git'
             }
         }
         stage('Sonarqube Analysis') {
