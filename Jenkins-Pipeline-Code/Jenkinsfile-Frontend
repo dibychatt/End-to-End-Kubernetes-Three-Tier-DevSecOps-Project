@@ -103,14 +103,14 @@ pipeline {
                             git config user.email "dibychatt@gmail.com"
                             git config user.name "dibychatt"
                             BUILD_NUMBER=${BUILD_NUMBER}
-                            echo \\$BUILD_NUMBER
-                            imageTag=\\$(grep -oP '(?<=frontend-app:)[^ ]+' deployment.yaml)
+                            echo \$BUILD_NUMBER
+                            imageTag=\$(grep -oP '(?<=frontend-app:)[^ ]+' deployment.yaml)
                             echo \\$imageTag
-                            sed -i "s#\\${REPOSITORY_URI}/\\${AWS_ECR_REPO_NAME}:\\${imageTag}#\\${REPOSITORY_URI}/\\${AWS_ECR_REPO_NAME}:\\${BUILD_NUMBER}#" deployment.yaml
+                            sed -i "s#\${REPOSITORY_URI}/\${AWS_ECR_REPO_NAME}:\${imageTag}#\${REPOSITORY_URI}/\${AWS_ECR_REPO_NAME}:\${BUILD_NUMBER}#" deployment.yaml
                             git add deployment.yaml
                             #git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                            git diff --quiet || git commit -m "Update deployment Image to version \\${BUILD_NUMBER}"
-                            git push https://\\${GITHUB_TOKEN}@github.com/\\${GIT_USER_NAME}/\\${GIT_REPO_NAME} HEAD:master
+                            git diff --quiet || git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
+                            git push https://\${GITHUB_TOKEN}@github.com/\${GIT_USER_NAME}/\${GIT_REPO_NAME} HEAD:master
                         """
                     }
                 }
